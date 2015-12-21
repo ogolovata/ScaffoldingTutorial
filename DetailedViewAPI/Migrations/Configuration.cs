@@ -28,7 +28,7 @@ namespace DetailedViewAPI.Migrations
             });
             context.Events.AddOrUpdate(new Event[]
             {
-                //public int Id, string EventIdasTitle,  int PageViewId, 
+                // Id, EventIdasTitle, PageViewId, StartDateTime
               new Event() { Id = 1, EventIdasTitle = "b0747ee3-4af3-4496-bf77-cddcac308a57", PageViewId = 1, StartDateTime = new DateTime(2015,11,10) },
               new Event() { Id = 2, EventIdasTitle = "b0747ee3-4af3-4496-bf77-cddcac308a58", PageViewId = 1, StartDateTime = new DateTime(2015,11,10)},
               new Event() { Id = 3, EventIdasTitle = "b0747ee3-4af3-4496-bf77-cddcac308a59", PageViewId = 1, StartDateTime = new DateTime(2015,11,10) },

@@ -16,13 +16,19 @@ namespace DetailedViewAPI.Controllers
     public class PageViewsController : ApiController
     {
         private EventContext db = new EventContext();
+        //Typedlambda expression for Select() method.
+        private static readonly Expression<Func<PageView, PageViewMD_Dto>> AsPageViewMD_Dto =
+            x => new EventMD_Dto
+            {
+                StartDateTime = x.StartDateTime,
+                EventIdasTitle = x.EventIdasTitle
+            };
 
         // GET: api/PageViews
         public IQueryable<PageView> GetPageViews()
-        {
-            return db.PageViews;
+        {     
+            return db.Events.Include(b => b.PageViewId).Select(AsPageViewMD_Dto);
         }
-
         // GET: api/PageViews/5
         [ResponseType(typeof(PageView))]
         public async Task<IHttpActionResult> GetPageView(int id)
@@ -38,16 +44,8 @@ namespace DetailedViewAPI.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
+            db.Dispose();
             base.Dispose(disposing);
-        }
-
-        private bool PageViewExists(int id)
-        {
-            return db.PageViews.Count(e => e.PageViewId == id) > 0;
         }
     }
 }
